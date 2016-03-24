@@ -1,5 +1,3 @@
-console.log("script.js");
-
 $.ajax({
     url: 'https://api.mlab.com/api/1/databases/gecko-cage/collections/temperature-humidity?apiKey=zLDXog8p4mCWRAmvKO-qD-cSHasw-2IL',
     type: 'GET'
@@ -14,8 +12,6 @@ function main (data) {
 	data.forEach(function (datum) {
 		datum.datetime = new Date(datum.datetime);
 	});
-
-	console.log(data);
 
 	var base = d3.select("#main");
 	var svg = base.append("svg")
@@ -38,8 +34,6 @@ function main (data) {
 	}
 	m.graph.x = m.svg.width * (m.margin / 2);
 	m.graph.y = m.svg.height * (m.margin / 2);
-
-	console.log(m);
 
 	// create backdrop
 	var rect = svg.append("rect")
