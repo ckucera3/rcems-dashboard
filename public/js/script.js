@@ -39,7 +39,7 @@ function main (data) {
 	var rect = svg.append("rect")
 	.attr("width", m.graph.width).attr("height", m.graph.height)
 	.attr("x", m.graph.x).attr("y", m.graph.y)
-	.attr("fill", "transparent")
+	.attr("fill", "white")
 	.attr("stroke", "black")
 	;
 
