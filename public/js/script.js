@@ -43,17 +43,19 @@ function main (data) {
 	.attr("stroke", "black")
 	;
 
-	var group = svg.append("g")
-	// .attr("transform", "scale(" + m.graph.width + " " + m.graph.height + ")")
-	// .attr("transform", "translate(" + m.graph.x + " " + m.graph.y + ")")
-	// .attr("width", m.graph.width).attr("height", m.graph.height)
-	// .attr("x", m.graph.x).attr("y", m.graph.y)
-		;
+	var group = svg.append("g");
 
 	// create axes
-	
+
 	// y
-	var yHumidity = d3.scale.linear().domain([0, 100]).range([m.graph.height + m.marginHeight, ((m.graph.y))])
+	var minHumidity = parseInt(d3.min(data.filter(function(d) {
+		return parseInt(d.left.humidity);
+	})).left.humidity);
+
+	var maxHumidity = parseInt(d3.max(data.filter(function(d) {
+		return parseInt(d.left.humidity);
+	})).left.humidity);
+	var yHumidity = d3.scale.linear().domain([minHumidity - 10, maxHumidity + 10]).range([m.graph.height + m.marginHeight, ((m.graph.y))])
 
 	// x
 	var minDate = d3.min(data.filter(function(d) {
@@ -71,6 +73,9 @@ function main (data) {
 	// y axis
     var yAxis = d3.svg.axis()
         .orient("left")
+        .tickFormat(function (d) {
+        	return d + " %";
+        })
         .scale(yHumidity);
     var yAxisG = group.append("g").attr("class", "yaxis")
     .attr("transform", "translate(" + m.graph.x + " " + 0 + ")")
@@ -93,12 +98,11 @@ function main (data) {
 	// create line
 	var line = d3.svg.line()
     .x(function(d) { return x(d.datetime); })
-    .y(function(d) { return yHumidity(parseInt(d.left.humidity)); });
+    .y(function(d) { return yHumidity(parseInt(d.left.humidity)); })
+    .interpolate("basis");
 
 	  group.append("path")
 	      .datum(data)
 	      .attr("class", "line")
 	      .attr("d", line);
-
-
 }
