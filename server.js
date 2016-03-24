@@ -34,6 +34,15 @@ app.get('/api/temperature-humidity/', function (req, res) {
 	})
 })
 
+//database routing
+app.get('/api/temperature-humidity/:id', function (req, res) {
+	var promise = collection.find();
+	promise.success(function (doc) {
+		res.send(doc);
+	})
+})
+
+
 //set up initial routing
 app.get('/', function (req, res) {
     res.render('index.html');

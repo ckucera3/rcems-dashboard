@@ -2,8 +2,7 @@ console.log("script.js");
 
 $.ajax({
     url: '/api/temperature-humidity/', //the URL to your node.js server that has data
-    dataType: 'json',
-    cache: false
+    dataType: 'json'
 }).done(function(data){
     //"data" will be JSON. Do what you want with it. 
     main(data);
