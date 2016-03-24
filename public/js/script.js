@@ -129,7 +129,7 @@ function main (data) {
 		;
 		var legendRect = legendG.append("rect")
 		.attr("width", m.marginWidth).attr("height", m.marginHeight)
-		.attr("stroke", "black")
+		// .attr("stroke", "black")
 		.attr("fill", "transparent")
 		;
 
@@ -274,7 +274,7 @@ function main (data) {
 		;
 		var legendRect = legendG.append("rect")
 		.attr("width", m.marginWidth).attr("height", m.marginHeight)
-		.attr("stroke", "black")
+		// .attr("stroke", "black")
 		.attr("fill", "transparent")
 		;
 
