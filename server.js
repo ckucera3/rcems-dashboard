@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //database routing
-app.get('/api/temperature-humidity/', function (req, res) {
+app.get('/api/th/', function (req, res) {
 	var promise = collection.find();
 	promise.success(function (doc) {
 		res.send(doc);
@@ -35,7 +35,7 @@ app.get('/api/temperature-humidity/', function (req, res) {
 })
 
 //database routing
-app.get('/api/temperature-humidity/:id', function (req, res) {
+app.get('/api/th/:id', function (req, res) {
 	var promise = collection.find();
 	promise.success(function (doc) {
 		res.send(doc);
