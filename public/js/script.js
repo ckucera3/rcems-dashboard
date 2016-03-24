@@ -1,7 +1,8 @@
 console.log("script.js");
 
 $.ajax({
-    url: '/api/th/'
+    url: '/api/th/',
+    type: 'GET'
 }).done(function(data){
     //"data" will be JSON. Do what you want with it. 
     main(data);
