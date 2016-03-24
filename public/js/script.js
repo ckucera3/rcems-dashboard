@@ -1,3 +1,5 @@
+console.log("script.js");
+
 $.ajax({
     url: '/api/temperature-humidity/', //the URL to your node.js server that has data
     dataType: 'json',
