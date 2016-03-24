@@ -7,6 +7,16 @@ $.ajax({
 });
 
 function main (data) {
+	// force data into javascript date object
+	data.forEach(function (datum) {
+		datum.right.humidity = parseInt(datum.right.humidity);
+		datum.left.humidity = parseInt(datum.left.humidity);
+		datum.right.temperature = parseInt(datum.right.temperature);
+		datum.left.temperature = parseInt(datum.left.temperature);
+		datum.datetime = new Date(datum.datetime);
+	});
+
+	console.log(data);
 
 	createHumidityGraph();
 	createTemperatureGraph();
@@ -14,10 +24,7 @@ function main (data) {
 	function createHumidityGraph() {
 
 
-		// force data into javascript date object
-		data.forEach(function (datum) {
-			datum.datetime = new Date(datum.datetime);
-		});
+
 
 		var base = d3.select("#main");
 		var svg = base.append("svg")
@@ -52,15 +59,36 @@ function main (data) {
 		var group = svg.append("g");
 
 		// create axes
+		
+		var minHArray = data.map(function (d) {
+			var leftH, rightH;
+			leftH = (d.left.humidity);
+			rightH = (d.right.humidity);
+			if (leftH > rightH) {
+				return rightH
+			} else {
+				return leftH;
+			}
+
+		});
+
+		var maxHArray = data.map(function (d) {
+			var leftH, rightH;
+			leftH = (d.left.humidity);
+			rightH = (d.right.humidity);
+			if (leftH > rightH) {
+				return leftH;
+			} else {
+				return rightH;
+			}
+
+		});
 
 		// y
-		var minHumidity = parseInt(d3.min(data.filter(function(d) {
-			return parseInt(d.left.humidity);
-		})).left.humidity);
+		var minHumidity = (d3.min(minHArray));
 
-		var maxHumidity = parseInt(d3.max(data.filter(function(d) {
-			return parseInt(d.left.humidity);
-		})).left.humidity);
+		var maxHumidity = d3.max(maxHArray);
+		console.log(maxHumidity);
 		var yHumidity = d3.scale.linear().domain([minHumidity - 10, maxHumidity + 10]).range([m.graph.height + m.marginHeight, ((m.graph.y))])
 
 		// x
@@ -104,7 +132,7 @@ function main (data) {
 		// create line for left side
 		var line = d3.svg.line()
 	    .x(function(d) { return x(d.datetime); })
-	    .y(function(d) { return yHumidity(parseInt(d.left.humidity)); })
+	    .y(function(d) { return yHumidity((d.left.humidity)); })
 	    .interpolate("basis");
 
 		group.append("path")
@@ -115,7 +143,7 @@ function main (data) {
 		// create line for right side
 		var lineRight = d3.svg.line()
 	    .x(function(d) { return x(d.datetime); })
-	    .y(function(d) { return yHumidity(parseInt(d.right.humidity)); })
+	    .y(function(d) { return yHumidity((d.right.humidity)); })
 	    .interpolate("basis");
 
 		group.append("path")
@@ -158,12 +186,6 @@ function main (data) {
 
 	function createTemperatureGraph() {
 
-		
-		// force data into javascript date object
-		data.forEach(function (datum) {
-			datum.datetime = new Date(datum.datetime);
-		});
-
 		var base = d3.select("#main2");
 		var svg = base.append("svg")
 		.attr("width", parseInt(base.style("width")))
@@ -199,12 +221,12 @@ function main (data) {
 		// create axes
 
 		// y
-		var minTemperature = parseInt(d3.min(data.filter(function(d) {
-			return parseInt(d.left.temperature);
+		var minTemperature = (d3.min(data.filter(function(d) {
+			return (d.left.temperature);
 		})).left.temperature);
 
-		var maxTemperature = parseInt(d3.max(data.filter(function(d) {
-			return parseInt(d.left.temperature);
+		var maxTemperature = (d3.max(data.filter(function(d) {
+			return (d.left.temperature);
 		})).left.temperature);
 		var yTemperature = d3.scale.linear().domain([minTemperature - 10, maxTemperature + 10]).range([m.graph.height + m.marginHeight, ((m.graph.y))])
 
@@ -249,7 +271,7 @@ function main (data) {
 		// create line for left side
 		var line = d3.svg.line()
 	    .x(function(d) { return x(d.datetime); })
-	    .y(function(d) { return yTemperature(parseInt(d.left.temperature)); })
+	    .y(function(d) { return yTemperature((d.left.temperature)); })
 	    .interpolate("basis");
 
 		group.append("path")
@@ -260,7 +282,7 @@ function main (data) {
 		// create line for right side
 		var lineRight = d3.svg.line()
 	    .x(function(d) { return x(d.datetime); })
-	    .y(function(d) { return yTemperature(parseInt(d.right.temperature)); })
+	    .y(function(d) { return yTemperature((d.right.temperature)); })
 	    .interpolate("basis");
 
 		group.append("path")
