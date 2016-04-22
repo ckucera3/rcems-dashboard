@@ -17,7 +17,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
   process.env.OPENSHIFT_APP_NAME;
 }
 
-console.log(uri);
+
 
 var db = monk(uri);
 app.db = db;
@@ -44,6 +44,10 @@ app.get('/api/th/', function (req, res) {
 		res.send(doc);
 	})
 })
+
+app.get('/api/uri', function(req, res) {
+	res.send(uri);
+});
 
 //database routing
 app.get('/api/th/:id', function (req, res) {
