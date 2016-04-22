@@ -1,5 +1,13 @@
+// $.ajax({
+//     url: 'https://api.mlab.com/api/1/databases/gecko-cage/collections/temperature-humidity?apiKey=zLDXog8p4mCWRAmvKO-qD-cSHasw-2IL',
+//     type: 'GET'
+// }).done(function(data){
+//     //"data" will be JSON. Do what you want with it. 
+//     main(data);
+// });
+
 $.ajax({
-    url: 'https://api.mlab.com/api/1/databases/gecko-cage/collections/temperature-humidity?apiKey=zLDXog8p4mCWRAmvKO-qD-cSHasw-2IL',
+    url: 'https://gecko-ckucera.rhcloud.com/api/th/',
     type: 'GET'
 }).done(function(data){
     //"data" will be JSON. Do what you want with it. 

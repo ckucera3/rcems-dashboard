@@ -8,6 +8,17 @@ var app = express();
 
 //configure mongodb
 var uri = 'mongodb://reader:123@ds021999.mlab.com:21999/gecko-cage'
+
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+  uri = "mongodb://" + process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+  process.env.OPENSHIFT_APP_NAME;
+}
+
+console.log(uri);
+
 var db = monk(uri);
 app.db = db;
 
