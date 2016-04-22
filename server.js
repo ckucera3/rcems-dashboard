@@ -45,6 +45,18 @@ app.get('/api/th/', function (req, res) {
 	})
 })
 
+app.post('/api/th/', function (req, res) {
+	if (req.body.secret == process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+		var newData = req.body.data
+		var promise = collection.insert(newData);
+		promise.success(function() {
+			res.send("success.");
+		});
+	} else {
+		res.send("Not successful.");
+	}
+})
+
 //database routing
 app.get('/api/th/:id', function (req, res) {
 	var promise = collection.find();
