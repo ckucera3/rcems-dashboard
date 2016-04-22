@@ -8,8 +8,6 @@ $.ajax({
 
 
 function main (data) {
-		console.log(data);
-
 	// force data into javascript date object
 	data.forEach(function (datum) {
 		datum.right.humidity = parseInt(datum.right.humidity);
@@ -29,8 +27,6 @@ function main (data) {
 	  // a must be equal to b
 	  return 0;
 	})
-
-	console.log(data);
 
 	createHumidityGraph();
 	createTemperatureGraph();
