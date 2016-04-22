@@ -45,10 +45,6 @@ app.get('/api/th/', function (req, res) {
 	})
 })
 
-app.get('/api/uri', function(req, res) {
-	res.send(uri);
-});
-
 //database routing
 app.get('/api/th/:id', function (req, res) {
 	var promise = collection.find();
