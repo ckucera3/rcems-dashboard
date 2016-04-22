@@ -8,13 +8,15 @@ $.ajax({
 
 
 function main (data) {
+		console.log(data);
+
 	// force data into javascript date object
 	data.forEach(function (datum) {
 		datum.right.humidity = parseInt(datum.right.humidity);
 		datum.left.humidity = parseInt(datum.left.humidity);
 		datum.right.temperature = parseInt(datum.right.temperature);
 		datum.left.temperature = parseInt(datum.left.temperature);
-		datum.datetime = new Date(datum.datetime);
+		datum.datetime = new Date(datum.datetime.$date);
 	});
 
 	data.sort(function(a, b) {
