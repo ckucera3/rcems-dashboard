@@ -1,3 +1,3 @@
-The OpenShift `nodejs` cartridge documentation can be found at:
+Server and html dashboard for RCEMS project. Allows view of the humidity and temperature of the cage environment setup. Deployed on Openshift.
 
-http://openshift.github.io/documentation/oo_cartridge_guide.html#nodejs
+The dashboard can be found [here](http://gecko-ckucera.rhcloud.com/).
